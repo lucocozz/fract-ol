@@ -1,29 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   includes.h                                         :+:      :+:    :+:   */
+/*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/14 11:42:51 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/06/15 19:51:34 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/06/15 12:46:17 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/06/15 13:07:54 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INCLUDES_H
-# define INCLUDES_H
+#include "fractol.h"
 
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <string.h>
-# include <math.h>
-
-# include "libgc.h"
-# include "libft.h"
-# include "mlx.h"
-
-#endif
+void	esc_key(t_mlx *mlx, t_fractal *fractal)
+{
+	(void)fractal;
+	exit_mlx(mlx);
+}

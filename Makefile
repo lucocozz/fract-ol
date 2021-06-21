@@ -6,14 +6,15 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/06/15 01:41:46 by lucocozz         ###   ########.fr        #
+#    Updated: 2021/06/20 23:57:34 by lucocozz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fractol
 
 SRCS =	main.c					mandelbrot.c				julia.c			\
-		events.c
+		hooks.c					keys.c						screen.c		\
+		init_fractal.c			color.c						mouse.c
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 DEPENDENCIES = $(OBJS:%.o=%.d)
 
@@ -34,9 +35,9 @@ CXXFLAGS = $(INCLUDES_DIR:%=-I %)
 ifeq ($(DEBUG), on)
 	CXXFLAGS += -g3 -fsanitize=address
 endif
-LDFLAGS = $(LIBS:%=-L lib%) $(LIBS:%=-l%) -lXext -lX11 -lm
+LDFLAGS = $(LIBS:%=-L lib%) $(LIBS:%=-l%) -lXext -lX11 -lm -g
 
-vpath %.c	$(addprefix $(SRCS_DIR), /. /fractal)
+vpath %.c	$(addprefix $(SRCS_DIR), /. /fractal /events /display)
 
 all:
 	$(foreach LIB, ${LIBS}, ${MAKE} -C lib${LIB} ;)

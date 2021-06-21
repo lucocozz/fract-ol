@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   includes.h                                         :+:      :+:    :+:   */
+/*   screen.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/14 11:42:51 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/06/15 19:51:34 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/06/15 15:19:10 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/06/21 14:15:09 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INCLUDES_H
-# define INCLUDES_H
+#include "fractol.h"
 
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdio.h>
-# include <string.h>
-# include <math.h>
+void	putpixel(t_mlx *mlx, int x, int y, int color)
+{
+	mlx->screen.data[y * WIN_WIDTH + x] = color;
+}
 
-# include "libgc.h"
-# include "libft.h"
-# include "mlx.h"
-
-#endif
+void	display_screen(t_mlx *mlx, t_fractal *fractal)
+{
+	ft_bzero(mlx->screen.data, WIN_HEIGHT * mlx->screen.line_size);
+	fractal->function(mlx, fractal);
+	mlx_put_image_to_window(mlx->ptr, mlx->window, mlx->screen.ptr, 0, 0);
+}
