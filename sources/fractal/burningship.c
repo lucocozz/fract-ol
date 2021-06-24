@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   burningship.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 20:49:21 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/06/24 02:49:47 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/06/24 02:48:14 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static int	init_mandelbrot(t_fractal *fractal)
+static int	init_burningship(t_fractal *fractal)
 {
-	fractal->iter_max = 50;
-	fractal->palette = get_palette(0);
-	gradient(fractal, &interpolate_hsv);
-	fractal->min = (t_complex){.r = -2.1, .i = -1.2};
-	fractal->max = (t_complex){.r = 0.6, .i = 1.2};
+	fractal->iter_max = 100;
+	fractal->palette = get_palette(2);
+	gradient(fractal, &interpolate_rgb);
+	fractal->min = (t_complex){.r = -2, .i = -2};
+	fractal->max = (t_complex){.r = 1, .i = 1};
 	return (1);
 }
 
@@ -31,19 +31,19 @@ static int	get_iteration(int x, int y, t_fractal *fractal)
 
 	iter = 0;
 	z = (t_complex){.r = 0, .i = 0};
-	c.r = fractal->min.r + x * fractal->delta.r;
-	c.i = fractal->min.i + y * fractal->delta.i;
+	c.r = x / fractal->delta.r + fractal->min.r;
+	c.i = y / fractal->delta.i + fractal->min.i;
 	while (pow(z.r, 2) + pow(z.i, 2) < 4 && iter < fractal->iter_max)
 	{
 		tmp = z.r;
 		z.r = pow(z.r, 2) - pow(z.i, 2) + c.r;
-		z.i = 2 * z.i * tmp + c.i;
+		z.i = fabs(2 * tmp * z.i) + c.i;
 		iter++;
 	}
 	return (iter);
 }
 
-void	mandelbrot(t_mlx *mlx, t_fractal *fractal)
+void	burningship(t_mlx *mlx, t_fractal *fractal)
 {
 	int			x;
 	int			y;
@@ -52,9 +52,9 @@ void	mandelbrot(t_mlx *mlx, t_fractal *fractal)
 
 	x = 0;
 	if (init == 0)
-		init = init_mandelbrot(fractal);
-	fractal->delta.r = (fractal->max.r - fractal->min.r) / (WIN_WIDTH - 1);
-	fractal->delta.i = (fractal->max.i - fractal->min.i) / (WIN_HEIGHT - 1);
+		init = init_burningship(fractal);
+	fractal->delta.r = WIN_WIDTH / (fractal->max.r - fractal->min.r);
+	fractal->delta.i = WIN_HEIGHT / (fractal->max.i - fractal->min.i);
 	while (x < WIN_WIDTH)
 	{
 		y = 0;

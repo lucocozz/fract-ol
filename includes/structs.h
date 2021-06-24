@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 14:44:37 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/06/20 23:01:10 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/06/24 02:47:25 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ typedef struct s_complex
 typedef struct s_palette
 {
 	int				size;
+	int				shade;
 	int				colors[MAX_COLOR];
-	int				gradient[MAX_COLOR];
+	int				*gradient;
 }					t_palette;
 
 typedef struct s_fractal
@@ -38,7 +39,7 @@ typedef struct s_fractal
 	void			(*function)();
 	int				iter_max;
 	t_palette		palette;
-	t_complex		zoom;
+	t_complex		delta;
 	t_complex		min;
 	t_complex		max;
 }					t_fractal;
@@ -78,5 +79,19 @@ typedef struct s_rgb
 	unsigned char	green;
 	unsigned char	blue;
 }					t_rgb;
+
+typedef struct s_frgb
+{
+	float			red;
+	float			green;
+	float			blue;
+}					t_frgb;
+
+typedef struct s_hsv
+{
+	int				hue;
+	float			saturation;
+	float			value;
+}					t_hsv;
 
 #endif

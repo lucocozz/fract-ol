@@ -1,80 +1,68 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.c                                            :+:      :+:    :+:   */
+/*   gradient.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 16:44:01 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/06/21 15:59:33 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/06/24 02:58:19 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-t_palette	get_palette(int index)
-{
-	static t_palette	palettes[] = {
-		{.size = 3, .colors = {MIDDLE_YELLOW, SHOCKING_PINK, TURQUOISE_BLUE}}
-	};
-
-	return (palettes[index]);
-}
-
-int	rgb(t_rgb color)
-{
-	return (color.red << 16 | color.green << 8 | color.blue);
-}
-
-t_rgb	hexa_to_rgb(int hexa)
-{
-	t_rgb	rgb;
-
-	rgb.red = hexa & RED >> 16;
-	rgb.green = hexa & GREEN >> 8;
-	rgb.blue = hexa & BLUE;
-	return (rgb);
-}
-
-static int	mix_color(t_fractal *fractal, int index, float ratio)
+int	interpolate_rgb(t_fractal *fractal, int index, float ratio)
 {
 	t_rgb	color1;
 	t_rgb	color2;
 	t_rgb	result;
 
 	color1 = hexa_to_rgb(fractal->palette.colors[index]);
-	color2 = hexa_to_rgb(fractal->palette.colors[(index + 1) % fractal->palette.size]);
+	color2 = hexa_to_rgb(fractal->palette.colors[(index + 1)
+			% fractal->palette.size]);
 	result.red = color1.red + ratio * (color2.red - color1.red);
 	result.green = color1.green + ratio * (color2.green - color1.green);
 	result.blue = color1.blue + ratio * (color2.blue - color1.blue);
-	return (rgb(result));
+	return (rgb_to_hexa(result));
 }
 
-void	init_gradient(t_fractal *fractal)
+int	interpolate_hsv(t_fractal *fractal, int index, float ratio)
+{
+	t_hsv	color1;
+	t_hsv	color2;
+	t_hsv	result;
+
+	color1 = rgb_to_hsv(hexa_to_rgb(fractal->palette.colors[index]));
+	color2 = rgb_to_hsv(hexa_to_rgb(fractal->palette.colors[(index + 1)
+				% fractal->palette.size]));
+	result.hue = color1.hue + ratio * (color2.hue - color1.hue);
+	result.saturation = color1.saturation + ratio
+		* (color2.saturation - color1.saturation);
+	result.value = color1.value + ratio * (color2.value - color1.value);
+	return (rgb_to_hexa(hsv_to_rgb(result)));
+}
+
+void	gradient(t_fractal *fractal,
+	int (*interpolate)(t_fractal *, int, float))
 {
 	int		i;
 	int		j;
 	int		color;
-	float	ratio;
 	int		range;
 
 	j = 0;
-	range = MAX_COLOR / fractal->palette.size;
+	fractal->palette.gradient = gc_malloc(sizeof(int) * fractal->palette.shade);
+	range = fractal->palette.shade / fractal->palette.size;
 	while (j < fractal->palette.size)
 	{
 		i = 0;
 		while (i < range)
 		{
-			ratio = i / range;
-			color = mix_color(fractal, j, ratio);
+			color = interpolate(fractal, j, (float)i / (float)range);
 			fractal->palette.gradient[i + (int)(range * j)] = color;
 			i++;
 		}
 		j++;
 	}
-}
-
-int	color(t_fractal *fractal, int iter)
-{
-	return (fractal->palette.gradient[iter % MAX_COLOR]);
 }

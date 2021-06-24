@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/06/20 23:57:34 by lucocozz         ###   ########.fr        #
+#    Updated: 2021/06/23 21:38:54 by lucocozz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,9 @@ NAME = fractol
 
 SRCS =	main.c					mandelbrot.c				julia.c			\
 		hooks.c					keys.c						screen.c		\
-		init_fractal.c			color.c						mouse.c
+		init_fractal.c			color.c						mouse.c			\
+		palette.c				gradient.c					zoom.c			\
+		hsv_to_rgb.c			rgb_to_hsv.c				burningship.c
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 DEPENDENCIES = $(OBJS:%.o=%.d)
 
@@ -35,9 +37,9 @@ CXXFLAGS = $(INCLUDES_DIR:%=-I %)
 ifeq ($(DEBUG), on)
 	CXXFLAGS += -g3 -fsanitize=address
 endif
-LDFLAGS = $(LIBS:%=-L lib%) $(LIBS:%=-l%) -lXext -lX11 -lm -g
+LDFLAGS = $(LIBS:%=-L lib%) $(LIBS:%=-l%) -lXext -lX11 -lm
 
-vpath %.c	$(addprefix $(SRCS_DIR), /. /fractal /events /display)
+vpath %.c	$(addprefix $(SRCS_DIR), /. /fractal /events /display /color)
 
 all:
 	$(foreach LIB, ${LIBS}, ${MAKE} -C lib${LIB} ;)

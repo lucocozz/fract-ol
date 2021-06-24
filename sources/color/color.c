@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mouse.c                                            :+:      :+:    :+:   */
+/*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/20 15:14:31 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/06/22 16:58:16 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/06/21 20:10:35 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/06/23 16:55:19 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	mouse_events(int key, int x, int y, t_params *params)
+int	rgb_to_hexa(t_rgb color)
 {
-	t_mlx			*mlx;
-	t_fractal		*fractal;
+	return (color.red << 16 | color.green << 8 | color.blue);
+}
 
-	(void)(x & y);
-	mlx = params->mlx;
-	fractal = params->fractal;
-	if (key == 4)
-		zoom_in(mlx, fractal);
-	else if (key == 5)
-		zoom_out(mlx, fractal);
-	display_screen(mlx, fractal);
-	return (0);
+t_rgb	hexa_to_rgb(int hexa)
+{
+	t_rgb	rgb;
+
+	rgb.red = (hexa & RED) >> 16;
+	rgb.green = (hexa & GREEN) >> 8;
+	rgb.blue = (hexa & BLUE);
+	return (rgb);
+}
+
+int	color(t_fractal *fractal, int iter)
+{
+	return (fractal->palette.gradient[iter % fractal->palette.shade]);
 }

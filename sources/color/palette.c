@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mouse.c                                            :+:      :+:    :+:   */
+/*   palette.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/20 15:14:31 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/06/22 16:58:16 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/06/21 19:04:24 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/06/24 03:23:18 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	mouse_events(int key, int x, int y, t_params *params)
+t_palette	get_palette(int index)
 {
-	t_mlx			*mlx;
-	t_fractal		*fractal;
+	static t_palette	palettes[] = {
+		{
+			.size = 3,
+			.shade = 60,
+			.colors = {MIDDLE_YELLOW, SHOCKING_PINK, INTERDIMENSIONAL_BLUE}
+		},
+		{
+			.size = 2,
+			.shade = 40,
+			.colors = {INTERDIMENSIONAL_BLUE, ORANGE}
+		},
+		{
+			.size = 3,
+			.shade = 60,
+			.colors = {ORANGE_BROWN, FLAME, MIDDLE_YELLOW}
+		}
+	};
 
-	(void)(x & y);
-	mlx = params->mlx;
-	fractal = params->fractal;
-	if (key == 4)
-		zoom_in(mlx, fractal);
-	else if (key == 5)
-		zoom_out(mlx, fractal);
-	display_screen(mlx, fractal);
-	return (0);
+	return (palettes[index]);
 }

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 18:47:17 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/06/17 21:51:02 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/06/23 21:37:05 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static t_fractal	*get_fractals(void)
 	static t_fractal	fractals[] = {
 		{.name = "mandelbrot", .function = &mandelbrot},
 		{.name = "julia", .function = &julia},
+		{.name = "burningship", .function = &burningship},
 		{.name = NULL}
 	};
 

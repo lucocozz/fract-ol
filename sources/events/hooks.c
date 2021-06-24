@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 01:25:23 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/06/20 19:26:17 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/06/22 17:09:14 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ static t_key_event	*get_events(void)
 {
 	static t_key_event	events[] = {
 		{.key = ESC_KEY, .event = &esc_key},
-		{.key = KEY_UP, .event = &scroll_up},
-		{.key = KEY_DOWN, .event = &scroll_down},
+		{.key = KEY_UP, .event = &zoom_in},
+		{.key = KEY_DOWN, .event = &zoom_out},
 		{0, NULL}
 	};
 
