@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/20 15:14:31 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/06/22 16:58:16 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/06/25 13:49:17 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	mouse_events(int key, int x, int y, t_params *params)
 		zoom_in(mlx, fractal);
 	else if (key == 5)
 		zoom_out(mlx, fractal);
-	display_screen(mlx, fractal);
+	draw_fractal(mlx, fractal);
+	display_screen(mlx);
 	return (0);
 }

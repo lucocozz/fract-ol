@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 01:25:23 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/06/22 17:09:14 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/06/25 13:55:43 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,9 @@ static int	loop_event(t_params *params)
 				events[i].event(mlx, fractal);
 			i++;
 		}
-		display_screen(mlx, fractal);
+		draw_fractal(mlx, fractal);
 	}
+	display_screen(mlx);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 11:29:22 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/06/23 16:56:26 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/06/24 18:11:29 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	main(int argc, char **argv)
 		gc_exit(EXIT_FAILURE, "Usage: ./fractol [fractal name]\n");
 	fractal = init_fractal(argv[1]);
 	mlx = init_mlx(fractal.name);
-	display_screen(&mlx, &fractal);
+	draw_fractal(&mlx, &fractal);
 	events_hook(&mlx, &fractal);
 	exit_mlx(&mlx);
 	return (0);

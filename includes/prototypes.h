@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 15:10:36 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/06/23 21:39:34 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/06/24 18:12:02 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void		zoom_out(t_mlx *mlx, t_fractal *fractal);
 
 //	display
 //		screen
-void		display_screen(t_mlx *mlx, t_fractal *fractal);
+void		draw_fractal(t_mlx *mlx, t_fractal *fractal);
+void		display_screen(t_mlx *mlx);
 void		putpixel(t_mlx *mlx, int x, int y, int color);
 
 //	color
