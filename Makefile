@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/06/23 21:38:54 by lucocozz         ###   ########.fr        #
+#    Updated: 2021/06/25 19:11:21 by lucocozz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ DEPENDENCIES = $(OBJS:%.o=%.d)
 
 SRCS_DIR = sources
 OBJS_DIR = .objs
-INCLUDES_DIR = includes $(LIBS:%=lib%/includes)
+INCLUDES_DIR = includes $(LIBS:%=lib%/includes) $(LIBS:%=lib%)
 
 LIBS = ft gc mlx
 
