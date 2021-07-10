@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 14:55:04 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/06/24 03:22:19 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/07/10 10:51:15 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ static int	init_julia(t_fractal *fractal)
 static int	get_iteration(int x, int y, t_fractal *fractal)
 {
 	int			iter;
-	double		tmp;
+	float		tmp;
 	t_complex	z;
 	t_complex	c;
 
 	iter = 0;
-	c = (t_complex){.r = 0.285, .i = 0.01};
+	c = (t_complex){.r = -0.562, .i = 0.642};
 	z.r = x / fractal->delta.r + fractal->min.r;
 	z.i = y / fractal->delta.i + fractal->min.i;
 	while (pow(z.r, 2) + pow(z.i, 2) < 4 && iter < fractal->iter_max)

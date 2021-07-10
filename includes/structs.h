@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 14:44:37 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/06/24 02:47:25 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/07/09 17:35:41 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ typedef struct s_fractal_info
 
 typedef struct s_complex
 {
-	double			r;
-	double			i;
+	float			r;
+	float			i;
 }					t_complex;
 
 typedef struct s_palette

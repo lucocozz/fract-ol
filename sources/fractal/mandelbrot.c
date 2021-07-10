@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 20:49:21 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/06/24 02:49:47 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/07/09 18:45:56 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,23 @@ static int	init_mandelbrot(t_fractal *fractal)
 static int	get_iteration(int x, int y, t_fractal *fractal)
 {
 	int			iter;
-	double		tmp;
 	t_complex	z;
 	t_complex	c;
+	t_complex	tmp;
 
 	iter = 0;
 	z = (t_complex){.r = 0, .i = 0};
 	c.r = fractal->min.r + x * fractal->delta.r;
 	c.i = fractal->min.i + y * fractal->delta.i;
-	while (pow(z.r, 2) + pow(z.i, 2) < 4 && iter < fractal->iter_max)
+	tmp = (t_complex){.r = 0, .i = 0};
+	while (tmp.r + tmp.i < 4 && iter < fractal->iter_max)
 	{
-		tmp = z.r;
-		z.r = pow(z.r, 2) - pow(z.i, 2) + c.r;
-		z.i = 2 * z.i * tmp + c.i;
+		z.i = z.r * z.i;
+		z.i += z.i;
+		z.i += c.i;
+		z.r = tmp.r - tmp.i + c.r;
+		tmp.r = z.r * z.r;
+		tmp.i = z.i * z.i;
 		iter++;
 	}
 	return (iter);

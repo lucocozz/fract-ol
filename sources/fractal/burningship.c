@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/14 20:49:21 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/06/24 02:48:14 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/07/09 17:36:27 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	init_burningship(t_fractal *fractal)
 static int	get_iteration(int x, int y, t_fractal *fractal)
 {
 	int			iter;
-	double		tmp;
+	float		tmp;
 	t_complex	z;
 	t_complex	c;
 
